@@ -347,7 +347,7 @@ docker compose logs db --tail=120
 For this project, the cleanest and most reliable path is:
 
 ```bash
-cd /Users/trylub/Desktop/AIfinancenews
+cd /Users/Desktop/AIfinancenews
 docker compose down -v
 docker compose up --build
 ```
