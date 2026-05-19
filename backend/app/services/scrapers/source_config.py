@@ -1,0 +1,86 @@
+SOURCES = [
+    {
+        "name": "ForexFactory",
+        "category": "Forex",
+        "rss_url": None,
+        "fallback_url": "https://www.forexfactory.com/news",
+    },
+    {
+        "name": "Investing.com",
+        "category": "Macroeconomics",
+        "rss_url": "https://www.investing.com/rss/news_25.rss",
+        "fallback_url": "https://www.investing.com/news/",
+    },
+    {
+        "name": "CoinGecko",
+        "category": "Crypto",
+        "rss_url": "https://www.coingecko.com/en/news.rss",
+        "fallback_url": "https://www.coingecko.com/en/news",
+    },
+    {
+        "name": "Moneycontrol",
+        "category": "Stocks",
+        "rss_url": "https://www.moneycontrol.com/rss/business.xml",
+        "fallback_url": "https://www.moneycontrol.com/news/business/",
+    },
+    {
+        "name": "Financial Times",
+        "category": "Macroeconomics",
+        "rss_url": "https://www.ft.com/rss/home",
+        "fallback_url": "https://www.ft.com/markets",
+    },
+    {
+        "name": "Bitget Research",
+        "category": "Crypto",
+        "rss_url": None,
+        "fallback_url": "https://www.bitget.com/news/research",
+    },
+    {
+        "name": "CoinDesk",
+        "category": "Crypto",
+        "rss_url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+        "fallback_url": "https://www.coindesk.com/",
+    },
+    {
+        "name": "Economic Times Markets",
+        "category": "Stocks",
+        "rss_url": "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms",
+        "fallback_url": "https://economictimes.indiatimes.com/markets",
+    },
+    {
+        "name": "Google News India Markets",
+        "category": "Stocks",
+        "rss_url": "https://news.google.com/rss/search?q=india+stock+market+OR+rupee+OR+nifty+when:12h&hl=en-IN&gl=IN&ceid=IN:en",
+        "fallback_url": "https://news.google.com/",
+    },
+    {
+        "name": "Google News India Economy",
+        "category": "Macroeconomics",
+        "rss_url": "https://news.google.com/rss/search?q=india+economy+budget+policy+when:12h&hl=en-IN&gl=IN&ceid=IN:en",
+        "fallback_url": "https://news.google.com/",
+    },
+    {
+        "name": "Google News Defense And Politics",
+        "category": "Geopolitics",
+        "rss_url": "https://news.google.com/rss/search?q=india+defense+budget+government+fund+policy+when:12h&hl=en-IN&gl=IN&ceid=IN:en",
+        "fallback_url": "https://news.google.com/",
+    },
+    {
+        "name": "Google News Global Markets",
+        "category": "Stocks",
+        "rss_url": "https://news.google.com/rss/search?q=global+markets+stocks+forex+commodities+when:1d&hl=en-US&gl=US&ceid=US:en",
+        "fallback_url": "https://news.google.com/",
+    },
+    {
+        "name": "Google News Crypto Live",
+        "category": "Crypto",
+        "rss_url": "https://news.google.com/rss/search?q=bitcoin+ethereum+crypto+ETF+when:1d&hl=en-US&gl=US&ceid=US:en",
+        "fallback_url": "https://news.google.com/",
+    },
+    {
+        "name": "Google News East Asia Markets",
+        "category": "Macroeconomics",
+        "rss_url": "https://news.google.com/rss/search?q=china+markets+yuan+japan+economy+asia+stocks+when:1d&hl=en-US&gl=US&ceid=US:en",
+        "fallback_url": "https://news.google.com/",
+    },
+]

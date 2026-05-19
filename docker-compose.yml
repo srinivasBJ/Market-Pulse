@@ -1,0 +1,37 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: marketpulse
+      POSTGRES_USER: market
+      POSTGRES_PASSWORD: market
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+    depends_on:
+      - db
+    environment:
+      APP_NAME: Market Pulse Atom
+      APP_ENV: production
+      DATABASE_URL: postgresql+psycopg://market:market@db:5432/marketpulse
+      FRONTEND_ORIGIN: http://localhost:5173
+      ENABLE_TRANSFORMER_SUMMARY: "false"
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+
+volumes:
+  postgres_data:
+

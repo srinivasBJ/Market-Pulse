@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply font-body;
+  background:
+    linear-gradient(180deg, #26282f 0%, #20232a 42%, #1a1d24 100%);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.panel {
+  @apply rounded-3xl border border-line bg-panel/90 shadow-soft backdrop-blur;
+}
+
+.metric-grid {
+  @apply grid gap-4 md:grid-cols-2 xl:grid-cols-4;
+}
+
+.desk-card {
+  @apply overflow-hidden rounded-xl border border-[#9caec8] bg-[#eef3f8] shadow-[0_8px_24px_rgba(30,48,77,0.08)];
+}
+
+.desk-title {
+  @apply border-b border-[#9caec8] bg-[#dce5f1] px-4 py-2 text-sm font-semibold tracking-[0.08em] text-[#274574];
+}
+
+.session-row {
+  @apply flex items-center justify-between rounded-lg bg-white px-3 py-2 text-[#233a60];
+}
+
+.session-tag {
+  @apply rounded-full px-2 py-1 text-xs font-semibold;
+}
+
+.session-scale {
+  @apply grid grid-cols-12 gap-0 rounded-t-md border border-b-0 border-[#aab8cb] bg-[#5e78a1] px-2 py-1 text-[11px] font-semibold uppercase text-white;
+}
+
+.session-now {
+  @apply absolute bottom-3 top-3 w-[3px] bg-[#6bcf55];
+}
+
+.marquee {
+  animation: marquee 28s linear infinite;
+}
+
+.theme-dark .desk-card {
+  @apply border-[#35323d] bg-[#181b23] shadow-[0_10px_28px_rgba(0,0,0,0.32)];
+}
+
+.theme-dark .desk-title {
+  @apply border-[#35323d];
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-30%);
+  }
+}
