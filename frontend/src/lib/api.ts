@@ -1,4 +1,5 @@
-const API_BASE = "http://localhost:8000/api/v1";
+const apiBaseInput = import.meta.env.VITE_API_BASE ?? "http://localhost:8000/api/v1";
+const API_BASE = apiBaseInput.replace(/\/$/, "");
 
 export type Article = {
   id: number;

@@ -14,3 +14,6 @@ class Settings(BaseSettings):
 
 settings = Settings()
 
+
+def frontend_origins() -> list[str]:
+    return [origin.strip() for origin in settings.frontend_origin.split(",") if origin.strip()]
