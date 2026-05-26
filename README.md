@@ -69,7 +69,7 @@ cd AIfinancenews
 If you already have the folder, just enter it:
 
 ```bash
-cd /Users/trylub/Desktop/AIfinancenews
+cd /Users/Desktop/AIfinancenews
 ```
 
 ### 2. Start everything
