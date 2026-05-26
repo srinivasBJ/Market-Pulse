@@ -83,4 +83,10 @@ SOURCES = [
         "rss_url": "https://news.google.com/rss/search?q=china+markets+yuan+japan+economy+asia+stocks+when:1d&hl=en-US&gl=US&ceid=US:en",
         "fallback_url": "https://news.google.com/",
     },
+    {
+        "name": "Hacker News",
+        "category": "Tech",
+        "rss_url": "https://news.ycombinator.com/rss",
+        "fallback_url": "https://news.ycombinator.com/",
+    },
 ]

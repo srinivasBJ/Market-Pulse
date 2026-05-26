@@ -54,6 +54,7 @@ const sourceFallbackUrls: Record<string, string> = {
   coindesk: "https://www.coindesk.com/",
   forexfactory: "https://www.forexfactory.com/news",
   "financial times": "https://www.ft.com/markets",
+  "hacker news": "https://news.ycombinator.com/",
   moneycontrol: "https://www.moneycontrol.com/news/business/markets/",
   "economic times markets": "https://economictimes.indiatimes.com/markets",
   coingecko: "https://www.coingecko.com/en/news",
@@ -84,6 +85,7 @@ const officialSources = new Set([
   "Investing.com",
   "Google News Defense And Politics",
   "Google News Global Markets",
+  "Hacker News",
 ]);
 
 function isOfficialStory(article: Article): boolean {
@@ -244,7 +246,7 @@ export function App() {
   const homeFeed = storyDeck(data.today.filter(isOfficialStory), homeOfficial);
   const hotPulse = (activeTab === "Home" ? homeFeed : feed).slice(0, 4);
   const pinnedToday = homeFeed.slice(0, 2);
-  const hotStory = (activeTab === "Home" ? homeFeed[0] : feed[0]) ?? rawTabStories[0] ?? data.today[0];
+  const hotStory = activeTab === "Home" ? (homeFeed[0] ?? rawTabStories[0] ?? data.today[0]) : (feed[0] ?? rawTabStories[0]);
   const latestStories = feed.slice(0, 8);
   const globalStories =
     activeTab === "Home"
@@ -766,11 +768,17 @@ export function App() {
                     <section className="desk-card overflow-hidden">
                       <div className={`desk-title text-white ${isDark ? "bg-[#2b3144]" : "bg-[#284c80]"}`}>{activeTab} Focus</div>
                       <div className={`${isDark ? "bg-[#111521]" : "bg-[#f7f9fc]"} space-y-3 p-4`}>
-                        <p className={`font-display text-[2rem] font-bold leading-tight ${isDark ? "text-white" : "text-[#21406d]"}`}>{hotStory.title}</p>
-                        <p className={`text-sm ${isDark ? "text-slate-400" : "text-[#5f718a]"}`}>
-                          From {hotStory.source} · {relativeTime(hotStory.published_at)} · {hotStory.sentiment_label}
-                        </p>
-                        <p className={`text-[15px] leading-7 ${isDark ? "text-slate-300" : "text-[#233a60]"}`}>{excerptText(hotStory, 320)}</p>
+                        {hotStory ? (
+                          <>
+                            <p className={`font-display text-[2rem] font-bold leading-tight ${isDark ? "text-white" : "text-[#21406d]"}`}>{hotStory.title}</p>
+                            <p className={`text-sm ${isDark ? "text-slate-400" : "text-[#5f718a]"}`}>
+                              From {hotStory.source} · {relativeTime(hotStory.published_at)} · {hotStory.sentiment_label}
+                            </p>
+                            <p className={`text-[15px] leading-7 ${isDark ? "text-slate-300" : "text-[#233a60]"}`}>{excerptText(hotStory, 320)}</p>
+                          </>
+                        ) : (
+                          <p className={`text-sm ${isDark ? "text-slate-400" : "text-[#5f718a]"}`}>No major stories available for this filter yet.</p>
+                        )}
                       </div>
                     </section>
                   </div>
