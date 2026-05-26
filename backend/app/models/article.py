@@ -16,11 +16,11 @@ class Article(Base):
     )
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
-    title: Mapped[str] = mapped_column(String(500), nullable=False)
-    source: Mapped[str] = mapped_column(String(120), nullable=False)
-    author: Mapped[str | None] = mapped_column(String(200))
-    url: Mapped[str] = mapped_column(String(1000), unique=True, nullable=False)
-    image_url: Mapped[str | None] = mapped_column(String(1000))
+    title: Mapped[str] = mapped_column(Text, nullable=False)
+    source: Mapped[str] = mapped_column(Text, nullable=False)
+    author: Mapped[str | None] = mapped_column(Text)
+    url: Mapped[str] = mapped_column(Text, unique=True, nullable=False)
+    image_url: Mapped[str | None] = mapped_column(Text)
     published_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     category: Mapped[str] = mapped_column(String(60), nullable=False)
     tags: Mapped[list[str]] = mapped_column(ARRAY(String), default=list)
@@ -30,10 +30,9 @@ class Article(Base):
     key_takeaways: Mapped[list[str]] = mapped_column(JSONB, default=list)
     sentiment_score: Mapped[float] = mapped_column(Float, default=0.0)
     sentiment_label: Mapped[str] = mapped_column(String(20), default="neutral")
-    cluster_key: Mapped[str | None] = mapped_column(String(255))
+    cluster_key: Mapped[str | None] = mapped_column(Text)
     related_tickers: Mapped[list[str]] = mapped_column(ARRAY(String), default=list)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow)
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=datetime.utcnow, onupdate=datetime.utcnow
     )
-

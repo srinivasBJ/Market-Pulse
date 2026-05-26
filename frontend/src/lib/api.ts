@@ -32,7 +32,7 @@ export type DashboardPayload = {
 };
 
 export async function fetchDashboard(): Promise<DashboardPayload> {
-  const response = await fetch(`${API_BASE}/dashboard`);
+  const response = await fetch(`${API_BASE}/dashboard`, { cache: "no-store" });
   if (!response.ok) {
     throw new Error("Unable to load dashboard");
   }
@@ -43,7 +43,7 @@ export async function fetchNews(query = "", category = ""): Promise<Article[]> {
   const params = new URLSearchParams();
   if (query) params.set("query", query);
   if (category) params.set("category", category);
-  const response = await fetch(`${API_BASE}/news?${params.toString()}`);
+  const response = await fetch(`${API_BASE}/news?${params.toString()}`, { cache: "no-store" });
   if (!response.ok) {
     throw new Error("Unable to load articles");
   }

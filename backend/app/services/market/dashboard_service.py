@@ -6,12 +6,13 @@ from sqlalchemy.orm import Session
 
 from app.models.article import Article
 from app.schemas.article import DashboardResponse
-from app.services.market.news_service import _ensure_seed_data
+from app.services.market.news_service import _ensure_seed_data, _maybe_refresh_data
 from app.services.nlp.trends import trending_topics_from_articles
 
 
 def build_dashboard(db: Session) -> DashboardResponse:
     _ensure_seed_data(db)
+    _maybe_refresh_data(db)
     now = datetime.now(timezone.utc)
     articles = list(db.scalars(select(Article).order_by(desc(Article.published_at)).limit(120)).all())
 
@@ -45,4 +46,3 @@ def build_dashboard(db: Session) -> DashboardResponse:
         sentiment_breakdown=sentiment_breakdown,
         movers=movers,
     )
-

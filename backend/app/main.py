@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes import router
 from app.core.config import frontend_origins, settings
-from app.db.session import Base, engine
+from app.db.session import Base, engine, ensure_article_schema
 from app.models import Article  # noqa: F401
 
 
@@ -18,6 +18,7 @@ def create_app() -> FastAPI:
     )
 
     Base.metadata.create_all(bind=engine)
+    ensure_article_schema()
     app.include_router(router, prefix="/api/v1")
 
     @app.get("/health", tags=["health"])

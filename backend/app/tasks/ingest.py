@@ -1,6 +1,7 @@
 from datetime import datetime, timezone
 
 from sqlalchemy import select
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from app.models.article import Article
@@ -72,26 +73,33 @@ def run_ingestion(db: Session) -> IngestionResponse:
             published_at = enriched.published_at or datetime.now(timezone.utc)
             category = infer_category(analysis_text, enriched.category)
 
-            db.add(
-                Article(
-                    title=enriched.title,
-                    source=enriched.source,
-                    author=enriched.author,
-                    url=enriched.url,
-                    image_url=enriched.image_url,
-                    published_at=published_at,
-                    category=category,
-                    tags=enriched.tags[:12],
-                    excerpt=(enriched.excerpt or enriched.content[:280]) if (enriched.excerpt or enriched.content) else None,
-                    short_summary=summary["short_summary"],
-                    overview=summary["overview"],
-                    key_takeaways=summary["key_takeaways"],
-                    sentiment_score=sentiment_score,
-                    sentiment_label=sentiment_label,
-                    cluster_key=build_cluster_key(enriched.title),
-                    related_tickers=extract_related_tickers(analysis_text),
-                )
+            article = Article(
+                title=enriched.title,
+                source=enriched.source,
+                author=enriched.author,
+                url=enriched.url,
+                image_url=enriched.image_url,
+                published_at=published_at,
+                category=category,
+                tags=enriched.tags[:12],
+                excerpt=(enriched.excerpt or enriched.content[:280]) if (enriched.excerpt or enriched.content) else None,
+                short_summary=summary["short_summary"],
+                overview=summary["overview"],
+                key_takeaways=summary["key_takeaways"],
+                sentiment_score=sentiment_score,
+                sentiment_label=sentiment_label,
+                cluster_key=build_cluster_key(enriched.title),
+                related_tickers=extract_related_tickers(analysis_text),
             )
+
+            try:
+                with db.begin_nested():
+                    db.add(article)
+                    db.flush()
+            except SQLAlchemyError as exc:
+                print(f"Skipping article insert for {enriched.url}: {exc}")
+                continue
+
             seen_urls.add(enriched.url)
             ingested += 1
 
